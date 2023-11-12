@@ -19,7 +19,6 @@ async function ImgClicked(event)
         }
     }
 
-    console.log(serverUrl);
     var result = await fetchPost(serverUrl + '/imgcheck', content, "application/json");
     console.log(result);
 
