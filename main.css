@@ -34,6 +34,7 @@ body {
 
 #myTable td, #myTable th {
 	border: 1px solid #ddd;
+	font-size: 30px;
 	padding: 8px;
 	text-align: center; /* 居中对齐 */
 	font-family: '標楷體', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 设置字体为標楷體 */
