@@ -2,6 +2,8 @@ import { fetchPost } from "./common/web.js";
 import { serverUrl } from "./common/def_global.js";
 
 document.getElementById('myImg').addEventListener('click', ImgClicked);
+var tmpEvent = {"offsetX": 0, "offsetY": 0};
+ImgClicked(tmpEvent);
 
 async function ImgClicked(event)
 {
