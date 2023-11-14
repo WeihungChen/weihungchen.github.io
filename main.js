@@ -25,21 +25,35 @@ async function ImgClicked(event)
 
     var imgPath = result[1].Img;
     if(imgPath != '')
-    {
         document.getElementById('myImg').src = imgPath;
-    }
 
     const myTable = document.getElementById('myTable');
-    myTable.innerHTML = '<thead><tr><th>服務機構</th><th>人數</th></tr></thead>';
-    myTable.innerHTML += '<tbody>';
-
-    var organizations = result[1].Organizations;
-    for(var i=0; i<organizations.length; i++)
+    if(imgPath == '0.png')
     {
-        console.log(organizations[i]);
-        var tmp = '<tr><td>' + organizations[i].Organization + '</td>';
-        tmp += '<td>' + organizations[i].amount + '</td></tr>';
-        myTable.innerHTML += tmp;
+        myTable.innerHTML = '<thead><tr><th>城市</th><th>人數</th></tr></thead>';
+        myTable.innerHTML += '<tbody>';
+
+        var cities = result[1].Cities;
+        for(var i=0; i<cities.length; i++)
+        {
+            var tmp = '<tr><td>' + cities[i].City + '</td>';
+            tmp += '<td>' + cities[i].amount + '</td></tr>';
+            myTable.innerHTML += tmp;
+        }
+        myTable.innerHTML += '</tbody>';
     }
-    myTable.innerHTML += '</tbody>';
+    else
+    {
+        myTable.innerHTML = '<thead><tr><th>服務機構</th><th>人數</th></tr></thead>';
+        myTable.innerHTML += '<tbody>';
+
+        var organizations = result[1].Organizations;
+        for(var i=0; i<organizations.length; i++)
+        {
+            var tmp = '<tr><td>' + organizations[i].Organization + '</td>';
+            tmp += '<td>' + organizations[i].amount + '</td></tr>';
+            myTable.innerHTML += tmp;
+        }
+        myTable.innerHTML += '</tbody>';
+    }
 }
