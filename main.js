@@ -7,8 +7,8 @@ async function ImgClicked(event)
 {
     var image = document.getElementById('myImg');
 
-    var x = event.clientX - image.offsetLeft;
-    var y = event.clientY - image.offsetTop;
+    var x = event.offsetX;
+    var y = event.offsetY;
 
     console.log('x,y=' + x + ',' + y);
 
