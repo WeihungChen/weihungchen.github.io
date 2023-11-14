@@ -36,7 +36,7 @@ async function ImgClicked(event)
         var cities = result[1].Cities;
         for(var i=0; i<cities.length; i++)
         {
-            var tmp = '<tr><td>' + cities[i].City + '</td>';
+            var tmp = '<tr><td>' + cities[i].Name + '</td>';
             tmp += '<td>' + cities[i].amount + '</td></tr>';
             myTable.innerHTML += tmp;
         }
