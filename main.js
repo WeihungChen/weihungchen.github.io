@@ -34,11 +34,14 @@ async function ImgClicked(event)
         myTable.innerHTML += '<tbody>';
 
         var cities = result[1].Cities;
-        for(var i=0; i<cities.length; i++)
+        if(cities != null)
         {
-            var tmp = '<tr><td>' + cities[i].Name + '</td>';
-            tmp += '<td>' + cities[i].amount + '</td></tr>';
-            myTable.innerHTML += tmp;
+            for(var i=0; i<cities.length; i++)
+            {
+                var tmp = '<tr><td>' + cities[i].Name + '</td>';
+                tmp += '<td>' + cities[i].amount + '</td></tr>';
+                myTable.innerHTML += tmp;
+            }
         }
         myTable.innerHTML += '</tbody>';
     }
@@ -48,11 +51,14 @@ async function ImgClicked(event)
         myTable.innerHTML += '<tbody>';
 
         var organizations = result[1].Organizations;
-        for(var i=0; i<organizations.length; i++)
+        if(organizations != null)
         {
-            var tmp = '<tr><td>' + organizations[i].Organization + '</td>';
-            tmp += '<td>' + organizations[i].amount + '</td></tr>';
-            myTable.innerHTML += tmp;
+            for(var i=0; i<organizations.length; i++)
+            {
+                var tmp = '<tr><td>' + organizations[i].Organization + '</td>';
+                tmp += '<td>' + organizations[i].amount + '</td></tr>';
+                myTable.innerHTML += tmp;
+            }
         }
         myTable.innerHTML += '</tbody>';
     }
