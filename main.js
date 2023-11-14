@@ -12,8 +12,6 @@ async function ImgClicked(event)
     var x = event.offsetX;
     var y = event.offsetY;
 
-    console.log('x,y=' + x + ',' + y);
-
     var content = {
         "method": "imgcheck",
         "data": {
@@ -23,7 +21,6 @@ async function ImgClicked(event)
     }
 
     var result = await fetchPost(serverUrl + '/api', content, "application/json");
-    console.log(result);
 
     var imgPath = result[1].Img;
     if(imgPath != '')
