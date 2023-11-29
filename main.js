@@ -32,9 +32,7 @@ async function tableClicked()
                 "Organization": this.innerHTML
             }
         }
-        console.log(content);
         var result = await fetchPost(serverUrl + '/api', content, "application/json");
-        console.log(result);
         if(result[0] != 200)
             return;
         if(result[1].ID != null)
@@ -61,7 +59,6 @@ async function ImgClicked(event)
     if(result[0] != 200)
         return;
 
-    console.log(result[1]);
     var imgPath = result[1].Img;
     if(imgPath != '')
         document.getElementById('myImg').src = imgPath;
@@ -79,7 +76,6 @@ function ShowInfo(col, header, info)
     const myTable = document.getElementById('myTable');
     myTable.innerHTML = '';
     var thead = document.createElement('thead');
-    console.log(header);
     for(var i=0; i<header.length; i++)
     {
         var tr = document.createElement('tr');
