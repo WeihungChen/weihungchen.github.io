@@ -4,11 +4,48 @@ import { serverUrl } from "./common/def_global.js";
 document.getElementById('myImg').addEventListener('click', ImgClicked);
 var tmpEvent = {"offsetX": 0, "offsetY": 0};
 ImgClicked(tmpEvent);
+var currentType = 0;
+
+async function tableClicked()
+{
+    if(currentType == 0)
+    {
+        var content = {
+            "method": "getstudentsinfo",
+            "data": {
+                "CityName": this.innerHTML
+            }
+        }
+        var result = await fetchPost(serverUrl + '/api', content, "application/json");
+        if(result[0] != 200)
+            return;
+        if(result[1].ID != null)
+            document.getElementById('myImg').src = result[1].ID + ".png";
+        ShowInfo(result[1].Col, result[1].Header, result[1].Info);
+        currentType = 1;
+    }
+    else if(currentType == 1)
+    {
+        var content = {
+            "method": "getstudentsinfo",
+            "data": {
+                "Organization": this.innerHTML
+            }
+        }
+        console.log(content);
+        var result = await fetchPost(serverUrl + '/api', content, "application/json");
+        console.log(result);
+        if(result[0] != 200)
+            return;
+        if(result[1].ID != null)
+            document.getElementById('myImg').src = result[1].ID + ".png";
+        ShowInfo(result[1].Col, result[1].Header, result[1].Info);
+        currentType = 2;
+    }
+}
 
 async function ImgClicked(event)
 {
-    var image = document.getElementById('myImg');
-
     var x = event.offsetX;
     var y = event.offsetY;
 
@@ -21,44 +58,98 @@ async function ImgClicked(event)
     }
 
     var result = await fetchPost(serverUrl + '/api', content, "application/json");
+    if(result[0] != 200)
+        return;
 
+    console.log(result[1]);
     var imgPath = result[1].Img;
     if(imgPath != '')
         document.getElementById('myImg').src = imgPath;
 
     const myTable = document.getElementById('myTable');
     if(imgPath == '0.png')
-    {
-        myTable.innerHTML = '<thead><tr><th>城市</th><th>人數</th></tr></thead>';
-        myTable.innerHTML += '<tbody>';
-
-        var cities = result[1].Cities;
-        if(cities != null)
-        {
-            for(var i=0; i<cities.length; i++)
-            {
-                var tmp = '<tr><td>' + cities[i].Name + '</td>';
-                tmp += '<td>' + cities[i].amount + '</td></tr>';
-                myTable.innerHTML += tmp;
-            }
-        }
-        myTable.innerHTML += '</tbody>';
-    }
+        currentType = 0;
     else
-    {
-        myTable.innerHTML = '<thead><tr><th>服務機構</th><th>人數</th></tr></thead>';
-        myTable.innerHTML += '<tbody>';
+        currentType = 1;
+    ShowInfo(result[1].Col, result[1].Header, result[1].Info);
+}
 
-        var organizations = result[1].Organizations;
-        if(organizations != null)
+function ShowInfo(col, header, info)
+{
+    const myTable = document.getElementById('myTable');
+    myTable.innerHTML = '';
+    var thead = document.createElement('thead');
+    console.log(header);
+    for(var i=0; i<header.length; i++)
+    {
+        var tr = document.createElement('tr');
+        for(var j=0; j<header[i].length; j++)
         {
-            for(var i=0; i<organizations.length; i++)
-            {
-                var tmp = '<tr><td>' + organizations[i].Organization + '</td>';
-                tmp += '<td>' + organizations[i].amount + '</td></tr>';
-                myTable.innerHTML += tmp;
-            }
+            var th = document.createElement('th');
+            th.innerHTML = header[i][j];
+            if(header[i].length == 1)
+                th.colSpan = col;
+            tr.appendChild(th);
         }
-        myTable.innerHTML += '</tbody>';
+        thead.appendChild(tr);
     }
+    myTable.appendChild(thead);
+    for(var i=0; i<info.length; i++)
+    {
+        var row = myTable.insertRow(-1);
+        for(var j=0; j<info[i].length; j++)
+        {
+            var cell = row.insertCell(-1);
+            cell.innerHTML = info[i][j];
+            if(j == 0)
+                cell.className = 'ctbclc';
+        }
+    }
+    var tbclc = document.querySelectorAll('.ctbclc');
+    for(var i=0; i<tbclc.length; i++)
+        tbclc[i].addEventListener('click', tableClicked);
+}
+
+function ShowOneCity(organizations)
+{
+    const myTable = document.getElementById('myTable');
+    myTable.innerHTML = '<thead><tr><th>服務機構</th><th>人數</th></tr></thead>';
+    myTable.innerHTML += '<tbody>';
+
+    if(organizations != null)
+    {
+        for(var i=0; i<organizations.length; i++)
+        {
+            var tmp = '<tr><td class="ctbclc">' + organizations[i].Organization + '</td>';
+            tmp += '<td>' + organizations[i].amount + '</td></tr>';
+            myTable.innerHTML += tmp;
+        }
+    }
+    myTable.innerHTML += '</tbody>';
+
+    var tbclc = document.querySelectorAll('.ctbclc');
+    for(var i=0; i<tbclc.length; i++)
+        tbclc[i].addEventListener('click', tableClicked);
+}
+
+function ShowWholeData(cities)
+{
+    const myTable = document.getElementById('myTable');
+    myTable.innerHTML = '<thead><tr><th>城市</th><th>人數</th></tr></thead>';
+    myTable.innerHTML += '<tbody>';
+
+    if(cities != null)
+    {
+        for(var i=0; i<cities.length; i++)
+        {
+            var tmp = '<tr><td class="ctbclc">' + cities[i].Name + '</td>';
+            tmp += '<td>' + cities[i].amount + '</td></tr>';
+            myTable.innerHTML += tmp;
+        }
+    }
+    myTable.innerHTML += '</tbody>';
+
+    var tbclc = document.querySelectorAll('.ctbclc');
+    for(var i=0; i<tbclc.length; i++)
+        tbclc[i].addEventListener('click', tableClicked);
 }
