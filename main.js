@@ -87,6 +87,10 @@ function ShowInfo(col, header, info)
                 th.colSpan = col;
             tr.appendChild(th);
         }
+        if(header.length > 1 && i == 0)
+            tr.className = 'header1';
+        else
+            tr.className = 'header2';
         thead.appendChild(tr);
     }
     myTable.appendChild(thead);

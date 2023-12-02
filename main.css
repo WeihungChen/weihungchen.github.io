@@ -38,7 +38,12 @@ body {
 	font-family: '標楷體', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 设置字体为標楷體 */
 }
 
-#myTable th {
+.header2 {
 	background-color: #ffb74d;
+	color: #fff;
+}
+
+.header1 {
+	background-color: #f87c1c;
 	color: #fff;
 }
