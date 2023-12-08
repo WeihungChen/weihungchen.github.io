@@ -10,7 +10,6 @@ async function exportTable()
         "data": {}
     }
     var result = await fetchPost(serverUrl + '/api', content, "application/json");
-    console.log(result);
     if(result[0] == 200)
     {
         const scriptElement = document.createElement('script');
@@ -23,7 +22,7 @@ async function exportTable()
             const ws = XLSX.utils.json_to_sheet(result[1]);
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1');
-            XLSX.writeFile(wb, 'output.xlsx');
+            XLSX.writeFile(wb, '報到名單.xlsx');
         });
     }
 }

@@ -14,6 +14,10 @@ h1 {
 	color: #4f42ff;
 }
 
+h2 {
+	color: #4f42ff;
+}
+
 #line {
 	border-top: 3px solid #4f42ff;
 	margin: 0px;
@@ -62,12 +66,12 @@ input, select {
 	box-sizing: border-box;
 	border: 2px solid #ff8c42;
 	background-color: transparent;
-	color: #000; /* 将文本颜色改为黑色 */
+	color: #000;
 	font-size: 16px;
 	border-radius: 5px;
 	outline: none;
-	line-height: 30px; /* 垂直居中 */
-	text-align: center; /* 文本居中 */
+	line-height: 30px;
+	text-align: center;
 }
 
 input, select:focus {
@@ -81,7 +85,7 @@ input, select:focus {
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
-	font-size: 16px;
+	font-size: 24px;
 	transition: background-color 0.3s ease;
 }
 
@@ -91,4 +95,32 @@ input, select:focus {
 
 #btn_next {
 	display: none;
+}
+
+#btn_summary {
+	display: none;
+}
+
+#show_winners {
+	display: none;
+}
+
+.centerTable {
+	margin-left:auto; 
+	margin-right:auto;
+	text-align:center;
+	font-size: 24px;
+}
+
+#winners_table td, #winners_table th {
+	border: 1px solid #ddd;
+	font-size: 30px;
+	padding: 8px;
+	text-align: center;
+	font-family: '標楷體', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#winners_table th {
+	background-color: #ffb74d;
+	color: #fff;
 }
