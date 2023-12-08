@@ -24,9 +24,6 @@ async function SubmitData()
         return;
     }
     const term = parseInt(content.data.Term);
-    console.log(term);
-    console.log(current);
-    console.log(content.data.Identity);
     if(content.data.Identity == '系友' && (term > current - 2 || term <= 0))
     {
         alert('請確認所屬第幾屆\n系友為第 1 - ' + (current-2) + '屆');
