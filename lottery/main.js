@@ -48,7 +48,13 @@ async function nextItem()
     }
     else
         document.getElementById('btn_summary').style.display = "block";
+    document.getElementById('item').style.display = 'block';
+    document.getElementById('provider').style.display = 'block';
+    document.getElementById('winners').style.display = 'block';
+    document.getElementById('form-container').style.maxWidth = "500px";
     document.getElementById('btn_next').style.display = "none";
+    document.getElementById('btn_summary').style.display = "none";
+    document.getElementById('show_winners').style.display = "none";
     document.getElementById('winners').innerHTML = "";
 }
 
@@ -91,6 +97,8 @@ async function Summary()
     document.getElementById('winners').innerHTML = '';
     document.getElementById('winners').style.display = 'none';
     document.getElementById('show_winners').style.display = 'block';
+    document.getElementById('item').style.display = 'none';
+    document.getElementById('provider').style.display = 'none';
     if(myTable == null)
         return;
     myTable.innerHTML = '';
@@ -122,7 +130,8 @@ async function Summary()
         }
     }
 
-    exportExcel();
+    if(currentItem + 1 == items.length || people.length == 0)
+        exportExcel();
 }
 
 async function Next()
@@ -164,8 +173,7 @@ async function Start()
     document.getElementById('btn_start').style.display = "none";
     if(currentItem + 1 < items.length && people.length > 0)
         document.getElementById('btn_next').style.display = "block";
-    else
-        document.getElementById('btn_summary').style.display = "block";
+    document.getElementById('btn_summary').style.display = "block";
 }
 
 function sleep(ms) {
