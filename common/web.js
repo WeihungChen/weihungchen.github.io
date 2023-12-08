@@ -19,7 +19,7 @@ async function fetchPost(url, body, contentType)
 	}
 	var result = await res.json();
 	if(res.status != 200 && result.error != null)
-		alert(result.error);
+		alert(result.error.String);
 	
 	return [res.status, result.data, result.error];
 }
